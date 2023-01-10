@@ -1,0 +1,2 @@
+http://semanticscience.org/resource/CHEMINF_000247 # surface area
+http://semanticscience.org/resource/CHEMINF_000126 # ionic radius

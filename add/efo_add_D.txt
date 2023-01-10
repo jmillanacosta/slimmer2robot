@@ -1,0 +1,2 @@
+http://purl.obolibrary.org/obo/CL_0000010 # cultured cell
+http://www.ebi.ac.uk/efo/EFO_0001444 # measurement

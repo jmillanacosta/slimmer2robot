@@ -1,0 +1,2 @@
+http://purl.obolibrary.org/obo/ENVO_00010483 # environmental material
+http://purl.obolibrary.org/obo/ENVO_00000428 # biome
