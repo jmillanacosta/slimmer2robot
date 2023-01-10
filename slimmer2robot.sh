@@ -8,7 +8,7 @@ mkdir -p iris
 cd iris
 
 
-for ONTO in "fabio" "aopo" "obi" "bfo" "ccont" "pato" "cheminf" "sio" "chmo" "npo" "uo" "bao" "ncit" "uberon" "chebi" "oae" "envo" "go" "efo" "obcs"
+for ONTO in "fabio" "aopo" "obi" "bfo" "ccont" "pato" "cheminf" "sio" "chmo" "npo" "uo" "bao" "ncit" "uberon" "chebi" "oae" "envo" "go" "efo" "obcs" "bto" "cito" "clo" "iao" "ro" 
 do 
 
 # Get the slimmer iris file for this ONTO module
