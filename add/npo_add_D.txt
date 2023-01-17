@@ -15,6 +15,7 @@ http://purl.bioontology.org/ontology/npo#NPO_1338 # toxicity
 http://purl.bioontology.org/ontology/npo#NPO_735 # dendrimer
 http://purl.bioontology.org/ontology/npo#NPO_1405 # technique
 http://purl.bioontology.org/ontology/npo#NPO_500 # solubility in water
+http://purl.bioontology.org/ontology/npo#NPO_1709 # LDH assay
 http://purl.bioontology.org/ontology/npo#NPO_1853 # medium
 http://purl.bioontology.org/ontology/npo#NPO_2001 # biopolymer nanoparticle
 http://purl.bioontology.org/ontology/npo#NPO_2002 # carbon black nanoparticle
@@ -27,6 +28,7 @@ http://purl.bioontology.org/ontology/npo#NPO_2008 # Feret diameter
 http://purl.bioontology.org/ontology/npo#NPO_2010 # circularity
 http://purl.bioontology.org/ontology/npo#NPO_2009 # dispersion agent
 http://purl.bioontology.org/ontology/npo#NPO_1364 # surface property
+http://purl.bioontology.org/ontology/npo#NPO_1804 # Standard Deviation
 http://purl.bioontology.org/ontology/npo#NPO_1541 # metal oxide nanoparticle
 http://purl.bioontology.org/ontology/npo#NPO_532 # suspension
 http://purl.bioontology.org/ontology/npo#NPO_1766 # DLS intrument

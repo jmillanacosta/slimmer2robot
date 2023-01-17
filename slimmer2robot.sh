@@ -1,75 +1,99 @@
-#!/bin/bash
-# Get slimmer files into term import files
-# Converts the eNM slimmer .iris files in https://github.com/enanomapper/ontologies/blob/master/config into ODK-ready files.
-
-echo "Create onto_add.txt files"
-echo "This script gets the .iris files used to set up the eNanoMapper slimming through Slimmer and converts them to a ROBOT/ODK compatible term import format."
-mkdir -p iris
-cd iris
-
-
+#patterns to look for in the .iris files
+opt="[+,-]" #add-remove pattern
+descendant="D" #D pattern
+sc="(?<=:)http:.+?(?=\s.)" #subclass pattern
+spc="http:.+(?=\):)" #superclass pattern
+comment="(?<=\s).+" #comment pattern
+#SPARQL constructs to be used
+insert="INSERT{?subclass rdfs:subClassOf <mySuperClass> .}"
+where="WHERE {{?s a owl:Class . } Filter(?s=<mySubClass>)};"
+insert_data="INSERT DATA{<mySuperClass> a owl:Class .};"
+#rm previous runs
+rm -f add/*
+rm -f remove/*
+rm -f sparql_subClass/*
+# Loop over all ontologies imported
 for ONTO in "fabio" "aopo" "obi" "bfo" "ccont" "pato" "cheminf" "sio" "chmo" "npo" "uo" "bao" "ncit" "uberon" "chebi" "oae" "envo" "go" "efo" "obcs" "bto" "cito" "clo" "iao" "ro" 
 do 
-
-# Get the slimmer iris file for this ONTO module
+# Get the slimmer .iris file for this module
     wget -nc -q https://raw.githubusercontent.com/enanomapper/ontologies/master/config/${ONTO}.iris
-    # Parse line by line
+# Create SPARQL query for this module
+    cp query_template.ru sparql_subClass/${ONTO}.ru
+    cp query_template.ru sparql_subClass/${ONTO}-insert_data.ru
+# Parse line by line and extract (if any) the patterns
     while IFS= read -r line; do
-        # Comment?
-        comment=$(echo "$line" | grep -Po -m 1 "(?<=\s).+")
-        if [ -z "$comment" ]; then
-            comment="No comment"
-        fi
-        # Add Down tree?
-        down=$(echo "$line" | grep -o -e "+D" -e "-D")
-        if [ -z "$down" ]; then
-            down="no"
-        fi
-        # Is the resource added or removed?
-        option=$(echo "$line" | grep -os -e "^\+" -e "^\-")
-        if [ -z "$option" ]; then
-            term=$(echo "$line" | grep -Po "(?<=:)http:.+?(?=\s.)")
-            echo "${ONTO} No method \+ or \- specified for ${term}" 
-        else
-            if [ $option == "+" ]; then
-            # Is the Down tree added?
-                if [ $down != "no" ]; then
-                included=$(echo "$line" | grep -Po "(?<=:)http:.+?(?=\s.)")
-                includes=$(echo "$line" | grep -Po -m 1 "http:.+(?=\):)")
-                echo $ONTO NEW EXPORT: $included will be included under $includes and its children resources \(down tree\) will be added
-                # Add resource IRI to imports file for this ONTO (imports/ONTO-terms.txt)
-                echo ${included} \# ${comment} >> ../add/${ONTO}_add_D.txt
-                else
-                included=$(echo "$line" | grep -Po "(?<=:)http:.+?(?=\s.)")
-                includes=$(echo "$line" | grep -Po -m 1 "http:.+(?=\):)")
-                echo $ONTO NEW IMPORT: $included will be included under $includes 
-                # Add resource IRI to imports file for this ONTO (imports/ONTO-terms.txt)
-                echo ${included} \# ${comment} >> ../add/${ONTO}_add.txt
-                fi
-            fi
-            if [ $option == "-" ]; then
-                removed=$(echo "$line" | grep -Po "(?<=:)http:.+?(?=\s.)")
-                # In case there was no comment:
-                if [ -z "$removed" ]; then
-                removed=$(echo "$line" | grep -Po "http:.+")
-                fi
-                includes=$(echo "$line" | grep -Po -m 1 "http:.+(?=\):)")
-                # Add resource IRI to remove file for this ONTO (remove/ONTO-remove.txt)
-                # Is Down tree removed? (select children, remove them)
-                if [ $down != "no" ]; then
-                    echo ${removed} \#${comment} >> ../remove/${ONTO}_remove_D.txt
-                    echo $ONTO NEW REMOVAL with children: $removed and its children resources
-                else
-                    echo ${removed} \#${comment} >> ../remove/${ONTO}_remove.txt
-                    echo $ONTO NEW REMOVAL: $removed 
-                fi
-            fi
+        add_sc=$(echo $line | grep -Po "$sc")
+        add_spc=$(echo $line | grep -Po "$spc")
+        add_comment=$(echo $line | grep -Po "$comment")
+        add_opt=$(echo $line | grep -Po "$opt")
+        add_d=$(echo $line | grep -Po "$descendant") # rm
+        if echo $line | grep -Po "$descendant"; then add_d=$(echo "$descendant"); else add_d="no"; fi
+        sc_curie=$(basename $add_sc)
+        if basename $add_spc; then spc_curie=$(basename $add_spc); else spc_curie="none";fi
         
+# Add term
+        if [[ $add_opt == *"+"* ]]; then
+# Add with descendants
+            if [[ $add_d == "$descendant" ]]; then
+                echo ${add_sc} \# ${add_comment} >> add/${ONTO}_add_D.txt
+                
+            else
+# Add without descendants
+                echo "$add_sc, opt=$add_opt"
+                echo ${add_sc} \# ${add_comment} >> add/${ONTO}_add.txt
+            fi
+# Remove term? 
+        else
+# Remove with descendants
+            if [[ $add_d == "$descendant" ]]; then
+                echo ${add_sc} \# ${add_comment} >> remove/${ONTO}_remove_D.txt
+            else
+            echo ${add_sc} \# ${add_comment} >> remove/${ONTO}_remove.txt
+            fi
+        fi
+# New subsumption specified: construct SPARQL line for this term
+        if [[ $spc_curie != "none" ]]; then
+# Remove # from curie
+            if [[ "$sc_curie" == *"#"* ]]; then sc_curie=$(echo $sc_curie  | grep -o '#.*' | sed 's/#//'); fi
+            if [[ "$spc_curie" == *"#"* ]]; then spc_curie=$(echo $spc_curie  | grep -o '#.*' | sed 's/#//'); fi
+# Change underscores for colons
+            if [[ "$sc_curie" == *"_"* ]]; then sc_curie=$(echo $sc_curie | sed 's/_/:/'); fi    
+            if [[ "$spc_curie" == *"_"* ]]; then spc_curie=$(echo $spc_curie | sed 's/_/:/'); fi     
+# Fix curie:ncit, aopo, fabio
+            if [[ $add_sc == *"Thesaurus.owl"* ]]; then sc_curie=$(echo Thesaurus:$sc_curie);fi
+            if [[ $add_spc == *"Thesaurus.owl"* ]]; then spc_curie=$(echo Thesaurus:$spc_curie);fi
+            if [[ $add_sc == *"aopkb"* ]]; then sc_curie=$(echo aopo:$sc_curie);fi
+            if [[ $add_spc == *"aopkb"* ]]; then spc_curie=$(echo aopo:$spc_curie);fi
+            if [[ $add_sc == *"fabio"* ]]; then sc_curie=$(echo fabio:$sc_curie);fi
+            if [[ $add_spc == *"fabio"* ]]; then spc_curie=$(echo fabio:$spc_curie);fi
+# Group obo ontologies
+            
+            for obo_ont in "bfo" "bto" "chebi" "chmo" "cl" "envo" "go" "iao" "obcs" "obi" "pato" 
+            do
+                if [[ ${add_sc,,} != *${obo_ont,,}* ]]; then 
+                sc_curie=$(echo "${sc_curie,,}"); else
+                sc_curie=$(echo obo:$(basename $add_sc));
+                break 
+                fi 
+            done
+            for obo_ont in "bfo" "bto" "chebi" "chmo" "cl" "envo" "go" "iao" "obcs" "obi" "pato" 
+            do
+                if [[ ${add_spc,,} != *${obo_ont,,}* ]]; then
+                spc_curie=$(echo "${spc_curie,,}"); else
+                spc_curie=$(echo obo:$(basename $add_spc)); 
+                break
+                fi 
+            done           
+# Write query in proper query file
+            echo -e $insert | sed "s|mySuperClass|$add_spc|" >> sparql_subClass/${ONTO}.ru
+            echo $where | sed "s|mySubClass|$add_sc|" >> sparql_subClass/${ONTO}.ru
+# In case the parent class is not in the slim:
+            if [[ ${add_spc} != *${ONTO}* ]];then
+            echo -e $insert_data | sed "s|mySuperClass|$add_spc|" | sed "s|mySuperClass|$spc_curie|">> sparql_subClass/${ONTO}-insert_data.ru
+
+
+            fi
         fi
     done < ${ONTO}.iris
+    rm ${ONTO}.iris
 done
-echo ______________________________________________________________________________________________________________________________________________________________
-echo Term import files created
-cd ../ 
-rm -r iris
-

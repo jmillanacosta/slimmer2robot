@@ -29,14 +29,11 @@ http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C41146 # speed
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C16583 # filtration
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C48160 # freezing
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C63813 # hydrophobicity
-http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C48040 # Matrix-Assisted Laser Desorption/Ionization
-http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C64657 # Dilution
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C62321 # Field Flow Fractionation
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C45998 # Oxidation-Reduction Potential
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C49236 # Therapeutic procedure
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C156231 # reactive therapy
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C47874 # Separation Column;Column;Separation Column
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C63495 # Additive
-http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C44374 # Diesel Exhaust Particulate
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C157206 # Adsorption
 http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C67311 # Microgram per Square Centimeter

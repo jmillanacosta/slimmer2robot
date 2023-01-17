@@ -17,7 +17,6 @@ http://purl.obolibrary.org/obo/CHEBI_33281 # antimicrobial role
 http://purl.obolibrary.org/obo/CHEBI_50824 # hematite nanoparticle
 http://purl.obolibrary.org/obo/CHEBI_50823 # magnetite nanoparticle
 http://purl.obolibrary.org/obo/CHEBI_131898 # platinum copper nanoparticle
-http://purl.obolibrary.org/obo/CHEBI_18246 # (1?4)-ß-D-glucan
 http://purl.obolibrary.org/obo/CHEBI_61483 # dendritic polymer
 http://purl.obolibrary.org/obo/CHEBI_134404 # graphene nanoparticle
 http://purl.obolibrary.org/obo/CHEBI_134403 # poly(styrene) nanoparticle

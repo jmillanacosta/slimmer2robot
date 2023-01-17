@@ -19,6 +19,7 @@ http://purl.obolibrary.org/obo/CHEBI_3311 # calcium carbonate 
 http://purl.obolibrary.org/obo/CHEBI_133333 # nickel ferrite
 http://purl.obolibrary.org/obo/CHEBI_133337 # zinc ferrite 
 http://purl.obolibrary.org/obo/CHEBI:133340 # nickel-zinc ferrite
+http://purl.obolibrary.org/obo/CHEBI_18246 # (1?4)-ß-D-glucan
 http://purl.obolibrary.org/obo/CHEBI_133349 # nanofibrillar cellulose
 http://purl.obolibrary.org/obo/CHEBI_133354 # bentonite 
 http://purl.obolibrary.org/obo/CHEBI_133352 # amorphous silicon

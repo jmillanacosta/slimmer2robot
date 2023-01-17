@@ -9,11 +9,9 @@ http://purl.bioontology.org/ontology/npo#NPO_1830 # particle concentration
 http://purl.bioontology.org/ontology/npo#NPO_1529 # bioavailability
 http://purl.bioontology.org/ontology/npo#NPO_1365 # aspect ratio
 http://purl.bioontology.org/ontology/npo#NPO_1204 # isoelectric point
-http://purl.bioontology.org/ontology/npo#NPO_1709 # LDH assay
 http://purl.bioontology.org/ontology/npo#NPO_1911 # MTT assay
 http://purl.bioontology.org/ontology/npo#NPO_719 # liposome to lipid nanoparticle
 http://purl.bioontology.org/ontology/npo#NPO_1414 # emulsifier
-http://purl.bioontology.org/ontology/npo#NPO_1804 # Standard Deviation
 http://purl.bioontology.org/ontology/npo#NPO_1803 # Variance
 http://purl.bioontology.org/ontology/npo#NPO_1800 # Mean
 http://purl.bioontology.org/ontology/npo#NPO_1802 # Mode
