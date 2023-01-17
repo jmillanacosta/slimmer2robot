@@ -10,23 +10,53 @@ PREFIX ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>
 PREFIX npo:<http://purl.bioontology.org/ontology/npo#>
 PREFIX enm: <http://www.enanomapper.net/ontologies/enanomapper.owl#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/CL_0000003> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0003151>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/CL_0000003> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0002900>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/CL_0000003> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0001025>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/CL_0000003> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0002922>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/CL_0000003> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0001141>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/CL_0000003> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0004602>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/UBERON_0000062> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0000763>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/UBERON_0000062> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0001279>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/UBERON_0000062> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0000269>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/UBERON_0000062> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/BTO_0000341>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0003151> || ?o=<http://purl.obolibrary.org/obo/CL_0000003>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0002900> || ?o=<http://purl.obolibrary.org/obo/CL_0000003>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0001025> || ?o=<http://purl.obolibrary.org/obo/CL_0000003>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0002922> || ?o=<http://purl.obolibrary.org/obo/CL_0000003>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0001141> || ?o=<http://purl.obolibrary.org/obo/CL_0000003>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0004602> || ?o=<http://purl.obolibrary.org/obo/CL_0000003>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0000763> || ?o=<http://purl.obolibrary.org/obo/UBERON_0000062>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0001279> || ?o=<http://purl.obolibrary.org/obo/UBERON_0000062>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0000269> || ?o=<http://purl.obolibrary.org/obo/UBERON_0000062>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/BTO_0000341> || ?o=<http://purl.obolibrary.org/obo/UBERON_0000062>)};

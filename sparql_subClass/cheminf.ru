@@ -10,17 +10,38 @@ PREFIX ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>
 PREFIX npo:<http://purl.bioontology.org/ontology/npo#>
 PREFIX enm: <http://www.enanomapper.net/ontologies/enanomapper.owl#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://semanticscience.org/resource/CHEMINF_000247>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://semanticscience.org/resource/CHEMINF_000101>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://semanticscience.org/resource/CHEMINF_000031>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000030> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://semanticscience.org/resource/CHEMINF_000014>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.enanomapper.org/onto/ENM_8000019> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://semanticscience.org/resource/CHEMINF_000123>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/PATO_0002390> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://semanticscience.org/resource/CHEMINF_000125>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/PATO_0002390> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://semanticscience.org/resource/CHEMINF_000126>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://semanticscience.org/resource/CHEMINF_000247> || ?o=<http://purl.obolibrary.org/obo/BFO_0000019>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://semanticscience.org/resource/CHEMINF_000101> || ?o=<http://purl.obolibrary.org/obo/BFO_0000019>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://semanticscience.org/resource/CHEMINF_000031> || ?o=<http://purl.obolibrary.org/obo/BFO_0000019>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://semanticscience.org/resource/CHEMINF_000014> || ?o=<http://purl.obolibrary.org/obo/IAO_0000030>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://semanticscience.org/resource/CHEMINF_000123> || ?o=<http://purl.enanomapper.org/onto/ENM_8000019>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://semanticscience.org/resource/CHEMINF_000125> || ?o=<http://purl.obolibrary.org/obo/PATO_0002390>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://semanticscience.org/resource/CHEMINF_000126> || ?o=<http://purl.obolibrary.org/obo/PATO_0002390>)};

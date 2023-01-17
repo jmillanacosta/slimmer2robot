@@ -10,15 +10,33 @@ PREFIX ncit: <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#>
 PREFIX npo:<http://purl.bioontology.org/ontology/npo#>
 PREFIX enm: <http://www.enanomapper.net/ontologies/enanomapper.owl#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000040> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/ENVO_00010483>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000040> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/ENVO_00000428>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000040> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/ENVO_00010622>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/ENVO_00010622> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/ENVO_01000620>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.bioontology.org/ontology/npo#NPO_1364> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/ENVO_00010504>)};
-INSERT{?subclass rdfs:subClassOf <http://purl.obolibrary.org/obo/ENVO_00010504> .}
-WHERE {{?s a owl:Class . } Filter(?s=<http://purl.obolibrary.org/obo/ENVO_01001192>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/ENVO_00010483> || ?o=<http://purl.obolibrary.org/obo/BFO_0000040>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/ENVO_00000428> || ?o=<http://purl.obolibrary.org/obo/BFO_0000040>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/ENVO_00010622> || ?o=<http://purl.obolibrary.org/obo/BFO_0000040>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/ENVO_01000620> || ?o=<http://purl.obolibrary.org/obo/ENVO_00010622>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/ENVO_00010504> || ?o=<http://purl.bioontology.org/ontology/npo#NPO_1364>)};
+INSERT
+{?subclass rdfs:subClassOf ?o .}
+WHERE {{?s a owl:Class . 
+?o a owl:Class} 
+Filter(?s=<http://purl.obolibrary.org/obo/ENVO_01001192> || ?o=<http://purl.obolibrary.org/obo/ENVO_00010504>)};

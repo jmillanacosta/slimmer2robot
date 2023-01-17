@@ -5,8 +5,8 @@ sc="(?<=:)http:.+?(?=\s.)" #subclass pattern
 spc="http:.+(?=\):)" #superclass pattern
 comment="(?<=\s).+" #comment pattern
 #SPARQL constructs to be used
-insert="INSERT{?subclass rdfs:subClassOf <mySuperClass> .}"
-where="WHERE {{?s a owl:Class . } Filter(?s=<mySubClass>)};"
+insert="INSERT\n{?subclass rdfs:subClassOf ?o .}"
+where="WHERE {{?s a owl:Class . \n?o a owl:Class} \nFilter(?s=<mySubClass> || ?o=<mySuperClass>)};"
 insert_data="INSERT DATA{<mySuperClass> a owl:Class .};"
 #rm previous runs
 rm -f add/*
@@ -86,12 +86,10 @@ do
             done           
 # Write query in proper query file
             echo -e $insert | sed "s|mySuperClass|$add_spc|" >> sparql_subClass/${ONTO}.ru
-            echo $where | sed "s|mySubClass|$add_sc|" >> sparql_subClass/${ONTO}.ru
+            echo -e $where | sed "s|mySubClass|$add_sc|" | sed "s|mySuperClass|$add_spc|">> sparql_subClass/${ONTO}.ru
 # In case the parent class is not in the slim:
             if [[ ${add_spc} != *${ONTO}* ]];then
             echo -e $insert_data | sed "s|mySuperClass|$add_spc|" | sed "s|mySuperClass|$spc_curie|">> sparql_subClass/${ONTO}-insert_data.ru
-
-
             fi
         fi
     done < ${ONTO}.iris
